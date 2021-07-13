@@ -7,7 +7,7 @@ from torchvision import transforms
 from data_loader import get_loader
 import torch.nn.functional as F
 import numpy as np
-from models import C3D
+from crd_model import C3D
 from torch.autograd import Variable
 # Device configuration
 torch.cuda.set_device(0)

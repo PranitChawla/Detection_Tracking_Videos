@@ -18,22 +18,27 @@ def get_median (image):
 	else:
 		return -1
 
-path = "data/AVI"
+path = "/home/pranit/selflow_outputs"
 list1 = os.listdir(path)
 
 
 
-background = cv2.imread('data/AVI/0.png',1)
-background = background[320:480,250:400]
+background = cv2.imread('training_dataset'+'/'+'L2V1D1R1_'+str(1)+'.png',1)
+# print ('training_dataset/'+'L2V1D1R1_'+str(0)+'.png')
+# background = background[320:480,250:400]
 background_gray = cv2.cvtColor(background,cv2.COLOR_BGR2GRAY)
 backSub = cv2.createBackgroundSubtractorKNN()
 # background_gray = backSub.apply(background_gray)
 
 
-for i in range (1,len(list1)):
-	img = cv2.imread('data/AVI/'+str(i)+'.png',1)
-	img = img[320:480,250:400]
+for i in range (1,1000):
+	path1 = 'training_dataset/'+'L2V1D1R1_'+str(i)+'.png'
+	print (path1)
+	img = cv2.imread(path1,1)
+	# img = img[320:480,250:400]
 	gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+
 	fgMask = backSub.apply(gray)
 
 
@@ -64,6 +69,9 @@ for i in range (1,len(list1)):
 
 	cv2.imshow("mask",img3_left)
 	cv2.imshow("mask1",img3_right)
+	cv2.imshow("background",fgMask)
+	# cv2.imshow("frame",gray)
+	# cv2.imshow("difference",abs(gray-background_gray))
 
 	cv2.imwrite("tracking_results/"+"left"+str(i)+".jpg",img3_left)
 	cv2.imwrite("tracking_results/"+"right"+str(i)+".jpg",img3_right)
